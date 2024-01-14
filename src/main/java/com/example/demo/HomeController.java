@@ -19,9 +19,9 @@ public class HomeController {
     }
 
     @PostMapping("/enviar")
-    public String enviar(@RequestParam String nome, @RequestParam String contato, @RequestParam String sexo, Model model) {
+    public String enviar(@RequestParam String nome, @RequestParam String idade, @RequestParam String sexo, Model model) {
         model.addAttribute("nome", nome);
-        model.addAttribute("idade", contato);
+        model.addAttribute("idade", idade);
         model.addAttribute("sexo", sexo);
         Vendedor vend = new Vendedor(nome,sexo);
         return "resultado";
