@@ -1,12 +1,13 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";-- liberar o uso da funçao UUID generate
 CREATE TABLE Vendedor (
     id UUID PRIMARY KEY,
-    nome VARCHAR(255),
-    contato VARCHAR(255)
+    nome VARCHAR(50),
+    contato VARCHAR(15)
 );
 
 CREATE TABLE Itens (
     id UUID PRIMARY KEY,
-    nome VARCHAR(255),
+    nome VARCHAR(50),
     estoque INT,
     valor DECIMAL(10, 2)
 );
