@@ -16,6 +16,16 @@ public class Itens  implements Serializable{
     private UUID id;
     private String nome;
     private int estoque;
+
+    public Itens(String nome, int estoque, float valor) {
+        this.nome = nome;
+        this.estoque = estoque;
+        this.valor = valor;
+    }
+
+    public Itens() {
+    }
+
     private float valor;
 
     public UUID getId() {

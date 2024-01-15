@@ -49,7 +49,6 @@ public class VendedorController {
     public List<Vendedor> buscarVendedornome(@RequestParam String nome) {
         String query = "SELECT * FROM vendedor WHERE nome LIKE :nome";
         Query procurar = entityManager.createNativeQuery(query, Vendedor.class).setParameter("nome", "%" + nome + "%");
-        System.out.println("Consulta SQL: " + procurar.unwrap(org.hibernate.query.Query.class).getQueryString());
         return procurar.getResultList();
     }
 
