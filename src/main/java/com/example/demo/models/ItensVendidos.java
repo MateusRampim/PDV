@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 @Table(name = "Venda_ItemVendido")
 public class ItensVendidos {
     @ManyToOne
-    private Itens item;
+    private Item item;
     @Id
     private int id;
     /**
@@ -17,11 +17,11 @@ public class ItensVendidos {
     @ManyToOne
     private Vendedor vendedor;
 
-    public Itens getItem() {
+    public Item getItem() {
         return this.item;
     }
 
-    public void setItem(Itens item) {
+    public void setItem(Item item) {
         this.item = item;
     }
 

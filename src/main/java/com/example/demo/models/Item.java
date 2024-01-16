@@ -9,21 +9,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Itens")
-public class Itens  implements Serializable{
+@Table(name = "itens")
+public class Item implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String nome;
     private int estoque;
 
-    public Itens(String nome, int estoque, float valor) {
+    public Item() {
+    }
+
+    public Item(String nome, int estoque, float valor) {
         this.nome = nome;
         this.estoque = estoque;
         this.valor = valor;
-    }
-
-    public Itens() {
     }
 
     private float valor;

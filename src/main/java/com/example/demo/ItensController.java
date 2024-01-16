@@ -1,11 +1,12 @@
 package com.example.demo;
 
-import com.example.demo.models.Itens;
-import com.example.demo.models.Vendedor;
+import com.example.demo.models.Item;
+import com.example.demo.services.ItemService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,61 +14,38 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/itens")
 public class ItensController {
+
+    @Autowired
+    ItemService itemService;
     @PersistenceContext
     private EntityManager entityManager;
 
-    @PostMapping
-    @Transactional
-    public Itens cadastrarItens(@RequestBody Itens iten) {
-        String query = "INSERT INTO itens (id, nome, estoque,valor) VALUES (uuid_generate_v4(),  :nome , :estoque,:valor )";
-
-        entityManager.createNativeQuery(query)
-                .setParameter("nome",iten.getNome())
-                .setParameter("estoque",iten.getEstoque()).setParameter("valor",iten.getValor())
-                .executeUpdate();
-        return iten;
+    public ItensController(ItemService itemService) {
+        this.itemService = itemService;
     }
 
-    @GetMapping("/excluir")
+    @PostMapping
+    public Item cadastrarItens(@RequestBody Item item) {
+
+        return itemService.criar(item);
+    }
+
+    @DeleteMapping()
     @Transactional
-    public void excluirItem(@RequestParam String nome){
-        String query = "DELETE FROM itens WHERE nome = :nome";
-        entityManager.createNativeQuery(query).setParameter("nome",nome).executeUpdate();
+    public void excluirItem(@RequestBody Item item){
+        itemService.excluir(item);
     }
 
     @GetMapping
-    public List<Itens> buscarItens() {
-        String query = "SELECT * FROM itens;";
-        Query procurar = entityManager.createNativeQuery(query, Itens.class);
-
-        return procurar.getResultList();
+    public List<Item> buscarItens(@RequestBody(required = false)Item item) {
+        return itemService.buscar(item);
     }
 
-    @GetMapping("/nome")
+    @PutMapping
     @Transactional
-    public List<Itens> buscarItensNome(@RequestParam String nome) {
-        String query = "SELECT * FROM vendedor WHERE nome LIKE :nome";
-        Query procurar = entityManager.createNativeQuery(query, Itens.class).setParameter("nome", "%" + nome + "%");
-        return procurar.getResultList();
-    }
-    @GetMapping("/setaestoque")
-    @Transactional
-    public List<Itens> defineestoque(@RequestParam int estoque,@RequestParam String nome) {
-        String query ="UPDATE Itens SET estoque = :novo WHERE nome = :nome RETURNING *";
-        Query procurar = entityManager.createNativeQuery(query, Itens.class)
-                .setParameter("nome",  nome )
-                .setParameter("novo",estoque);
-        return procurar.getResultList();
+    public Item editar(@RequestBody Item item) {
+        return itemService.editar(item);
     }
 
-    @GetMapping("/ajustaestoque")
-    @Transactional
-    public List<Itens> ajustaestoque(@RequestParam int estoque,@RequestParam String nome) {
-        String query ="UPDATE Itens SET estoque = estoque + :novo WHERE nome = :nome RETURNING *";
-        Query procurar = entityManager.createNativeQuery(query, Itens.class)
-                .setParameter("nome",  nome )
-                .setParameter("novo",estoque);
-        return procurar.getResultList();
-    }
 
 }
