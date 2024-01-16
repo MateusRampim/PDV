@@ -20,11 +20,11 @@ CREATE TABLE Venda (
     FOREIGN KEY (vendedor_id) REFERENCES Vendedor(id)
 );
 
-
-CREATE TABLE Venda_ItemVendido (
-    venda_id UUID,
-    item_vendido_id UUID,
-    PRIMARY KEY (venda_id, item_vendido_id),
-    FOREIGN KEY (venda_id) REFERENCES Venda(id),
-    FOREIGN KEY (item_vendido_id) REFERENCES Itens(id)
+CREATE TABLE venda_item (
+                            id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+                            venda_id UUID,
+                            item_vendido_id UUID,
+                            FOREIGN KEY (venda_id) REFERENCES Venda(id),
+                            FOREIGN KEY (item_vendido_id) REFERENCES Itens(id)
 );
+

@@ -1,10 +1,12 @@
 package com.example.demo;
 
 import com.example.demo.models.Vendedor;
+import com.example.demo.services.VendedorService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -16,40 +18,28 @@ import java.util.Queue;
 public class VendedorController {
     @PersistenceContext
     private EntityManager entityManager;
-    @PostMapping
-    @Transactional
-    public Vendedor cadastrarVendedor(@RequestBody Vendedor vend) {
-        String query = "INSERT INTO Vendedor (id, nome, contato) VALUES (uuid_generate_v4(),  :nome , :contato )";
+    @Autowired
+    VendedorService vendedorService;
 
-        entityManager.createNativeQuery(query)
-                .setParameter("nome",vend.getNome())
-                .setParameter("contato",vend.getContato())
-                .executeUpdate();
-        return vend;
+    @PostMapping
+    public Vendedor cadastrarVendedor(@RequestBody Vendedor vend) {
+         return vendedorService.criar(vend);
     }
 
-
-    @PostMapping("/excluir")
-    @Transactional
-    public void excluirVendedor(@RequestParam String nome){
-        String query = "DELETE FROM vendedor WHERE nome = :nome";
-        entityManager.createNativeQuery(query).setParameter("nome",nome).executeUpdate();
-
+    @DeleteMapping
+    public void excluirVendedor(@RequestBody Vendedor vendedor){
+        vendedorService.excluir(vendedor);
     }
 
     @GetMapping
-    public List<Vendedor> buscarVendedor() {
-        String query = "SELECT * FROM vendedor;";
-        Query procurar = entityManager.createNativeQuery(query, Vendedor.class);
+    public List<Vendedor> buscarVendedor(@RequestBody(required = false)Vendedor vendedor) {
+        return  vendedorService.buscar(vendedor);
+    }
+    @PutMapping
+    public Vendedor editar(@RequestBody Vendedor vendedor){
+        return vendedorService.editar(vendedor);
+    }
 
-        return procurar.getResultList();
-    }
-    @GetMapping("/nome")
-    @Transactional
-    public List<Vendedor> buscarVendedornome(@RequestParam String nome) {
-        String query = "SELECT * FROM vendedor WHERE nome LIKE :nome";
-        Query procurar = entityManager.createNativeQuery(query, Vendedor.class).setParameter("nome", "%" + nome + "%");
-        return procurar.getResultList();
-    }
+
 
 }

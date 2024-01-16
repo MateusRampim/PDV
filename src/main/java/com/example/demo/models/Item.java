@@ -26,6 +26,16 @@ public class Item implements Serializable{
         this.valor = valor;
     }
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", estoque=" + estoque +
+                ", valor=" + valor +
+                '}';
+    }
+
     private float valor;
 
     public UUID getId() {

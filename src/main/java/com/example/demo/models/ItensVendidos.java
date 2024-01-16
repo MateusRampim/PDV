@@ -1,36 +1,46 @@
 package com.example.demo.models;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.Objects;
+import java.util.UUID;
 
 @Entity
-@Table(name = "Venda_ItemVendido")
+@Table(name = "venda_item")
 public class ItensVendidos {
-    @ManyToOne
-    private Item item;
     @Id
-    private int id;
-    /**
-     *
-     */
-    @ManyToOne
-    private Vendedor vendedor;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
-    public Item getItem() {
-        return this.item;
+    @Column(name = "venda_id")
+    private UUID venda_id;
+
+    @Column(name = "item_vendido_id")
+    private UUID item_vendido_id;
+
+    public ItensVendidos() {
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public UUID getId() {
+        return id;
     }
 
-    public Vendedor getVendedor() {
-        return this.vendedor;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
-    public void setVendedor(Vendedor vendedor) {
-        this.vendedor = vendedor;
+    public UUID getVenda_id() {
+        return venda_id;
     }
 
+    public void setVenda_id(UUID venda_id) {
+        this.venda_id = venda_id;
+    }
+
+    public UUID getItem_vendido_id() {
+        return item_vendido_id;
+    }
+
+    public void setItem_vendido_id(UUID item_vendido_id) {
+        this.item_vendido_id = item_vendido_id;
+    }
 }

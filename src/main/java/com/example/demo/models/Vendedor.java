@@ -9,13 +9,22 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Vendedor")
+@Table(name = "vendedor")
 public class Vendedor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String nome;
     private String contato;
+
+    @Override
+    public String toString() {
+        return "Vendedor{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", contato='" + contato + '\'' +
+                '}';
+    }
 
     public Vendedor() {
     }
@@ -25,7 +34,7 @@ public class Vendedor implements Serializable {
         this.contato = contato;
     }
 
-    public UUID getIdpesso() {
+    public UUID getId() {
         return this.id;
     }
 

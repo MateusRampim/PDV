@@ -30,17 +30,19 @@ public class ItemService {
     }
     @Transactional
     public List<Item> buscar(Item item){
-
-        if (item.getId() != null){
-            String query = "SELECT * FROM itens WHERE id = :id";
-            return entityManager.createNativeQuery(query,Item.class).setParameter("id",item.getId()).getResultList();
-        } else if (item.getNome()!= null) {
+        if (item != null){
+            if (item.getId() != null){
+                String query = "SELECT * FROM itens WHERE id = :id";
+                return entityManager.createNativeQuery(query,Item.class).setParameter("id",item.getId()).getResultList();
+            } else if (item.getNome()!= null) {
                 String query = "SELECT * FROM itens WHERE nome = :nome";
                 return entityManager.createNativeQuery(query,Item.class).setParameter("nome",item.getNome()).getResultList();
-        }else {
-                String query = "SELECT * FROM itens";
-                return entityManager.createNativeQuery(query, Item.class).getResultList();
+
+            }
         }
+        String query = "SELECT * FROM itens";
+        return entityManager.createNativeQuery(query, Item.class).getResultList();
+
 
     }
     @Transactional
