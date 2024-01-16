@@ -40,8 +40,8 @@ public class ItemService {
 
             }
         }
-        String query = "SELECT * FROM itens";
-        return entityManager.createNativeQuery(query, Item.class).getResultList();
+                String query = "SELECT * FROM itens";
+                return entityManager.createNativeQuery(query, Item.class).getResultList();
 
 
     }

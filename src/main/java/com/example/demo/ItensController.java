@@ -41,9 +41,12 @@ public class ItensController {
         return itemService.buscar(item);
     }
 
+
+
     @PutMapping
     @Transactional
     public Item editar(@RequestBody Item item) {
+
         return itemService.editar(item);
     }
 
