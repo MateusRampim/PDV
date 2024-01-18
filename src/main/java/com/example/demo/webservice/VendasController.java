@@ -1,12 +1,15 @@
-package com.example.demo;
+package com.example.demo.webservice;
 
-import com.example.demo.models.Item;
-import com.example.demo.models.Venda;
-import com.example.demo.models.VendaRequest;
-import com.example.demo.services.VendaService;
+import com.example.demo.api.VendaBuscar;
+import com.example.demo.business.models.Venda;
+import com.example.demo.api.VendaRequest;
+import com.example.demo.business.services.VendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
@@ -22,5 +25,9 @@ public class VendasController {
     @DeleteMapping
     public void excluir(@RequestBody Venda venda){
         vendaService.excluir(venda);
+    }
+    @GetMapping
+    public List<VendaRequest> buscar(@ModelAttribute VendaBuscar venda){
+        return vendaService.buscar(venda);
     }
 }

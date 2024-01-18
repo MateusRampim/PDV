@@ -1,4 +1,4 @@
-package com.example.demo.models;
+package com.example.demo.business.models;
 import jakarta.persistence.*;
 
 import java.util.Objects;

@@ -1,11 +1,7 @@
-package com.example.demo;
+package com.example.demo.webservice;
 
-import com.example.demo.models.Item;
-import com.example.demo.services.ItemService;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
-import jakarta.transaction.Transactional;
+import com.example.demo.business.models.Item;
+import com.example.demo.business.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,38 +13,25 @@ public class ItensController {
 
     @Autowired
     ItemService itemService;
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    public ItensController(ItemService itemService) {
-        this.itemService = itemService;
-    }
 
     @PostMapping
     public Item cadastrarItens(@RequestBody Item item) {
-
         return itemService.criar(item);
     }
-
+    /* PathParam*/
     @DeleteMapping()
-    @Transactional
-    public void excluirItem(@RequestBody Item item){
+    public void excluirItem(@RequestBody Item item) {
         itemService.excluir(item);
     }
-
+/* RequestParam*/
     @GetMapping
-    public List<Item> buscarItens(@RequestBody(required = false)Item item) {
+    public List<Item> buscarItens(@RequestBody(required = false) Item item) {
         return itemService.buscar(item);
     }
 
-
-
     @PutMapping
-    @Transactional
     public Item editar(@RequestBody Item item) {
-
         return itemService.editar(item);
     }
-
 
 }

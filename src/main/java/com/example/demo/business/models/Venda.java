@@ -1,4 +1,4 @@
-package com.example.demo.models;
+package com.example.demo.business.models;
 
 import java.io.Serializable;
 
@@ -24,7 +24,6 @@ public class Venda  implements Serializable {
 
     @Column(name = "dia")
     private Date dia;
-    // Constructors, getters, setters, etc.
 
     public Venda() {
     }

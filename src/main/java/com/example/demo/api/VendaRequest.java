@@ -1,10 +1,17 @@
-package com.example.demo.models;
+package com.example.demo.api;
+
+import com.example.demo.business.models.Item;
+import com.example.demo.business.models.Venda;
 
 import java.util.List;
 
 public class VendaRequest {
     private Venda venda;
     private List<Item> items;
+
+    public VendaRequest(Venda venda) {
+        this.venda = venda;
+    }
 
     public Venda getVenda() {
         return venda;

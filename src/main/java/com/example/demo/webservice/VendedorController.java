@@ -1,17 +1,13 @@
-package com.example.demo;
+package com.example.demo.webservice;
 
-import com.example.demo.models.Vendedor;
-import com.example.demo.services.VendedorService;
+import com.example.demo.business.models.Vendedor;
+import com.example.demo.business.services.VendedorService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Queue;
 
 @RestController
 @RequestMapping("/api/v1/vendedores")

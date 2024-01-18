@@ -1,6 +1,6 @@
-package com.example.demo.services;
+package com.example.demo.business.services;
 
-import com.example.demo.models.Vendedor;
+import com.example.demo.business.models.Vendedor;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
