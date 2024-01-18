@@ -13,6 +13,11 @@ public class VendaRequest {
         this.venda = venda;
     }
 
+    public VendaRequest(Venda venda, List<Item> items) {
+        this.venda = venda;
+        this.items = items;
+    }
+
     public Venda getVenda() {
         return venda;
     }

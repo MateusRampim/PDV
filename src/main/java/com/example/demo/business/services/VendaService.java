@@ -77,7 +77,7 @@ public class VendaService {
                     .setParameter("fim", Date.valueOf(LocalDate.parse(venda.getFim(), formatter)))
                     .getResultList();
             for (Venda venda1 : vendas) {
-                vendaRequests.add(new VendaRequest(venda1));
+                vendaRequests.add(new VendaRequest(venda1,itensVendidosService.buscar(venda1.getId())));
             }
             return vendaRequests;
         }
@@ -86,7 +86,7 @@ public class VendaService {
         vendas = entityManager.createNativeQuery(query, Venda.class)
                 .getResultList();
         for (Venda venda1 : vendas) {
-            vendaRequests.add(new VendaRequest(venda1));
+            vendaRequests.add(new VendaRequest(venda1,itensVendidosService.buscar(venda1.getId())));
         }
         return vendaRequests;
     }
