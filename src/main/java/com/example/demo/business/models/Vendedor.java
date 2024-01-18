@@ -1,12 +1,9 @@
 package com.example.demo.business.models;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.UUID;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "vendedor")
@@ -17,6 +14,14 @@ public class Vendedor implements Serializable {
     private String nome;
     private String contato;
 
+    public Vendedor() {
+    }
+
+    public Vendedor(String nome, String contato) {
+        this.nome = nome;
+        this.contato = contato;
+    }
+
     @Override
     public String toString() {
         return "Vendedor{" +
@@ -24,14 +29,6 @@ public class Vendedor implements Serializable {
                 ", nome='" + nome + '\'' +
                 ", contato='" + contato + '\'' +
                 '}';
-    }
-
-    public Vendedor() {
-    }
-
-    public Vendedor(String nome, String contato) {
-        this.nome = nome;
-        this.contato = contato;
     }
 
     public UUID getId() {

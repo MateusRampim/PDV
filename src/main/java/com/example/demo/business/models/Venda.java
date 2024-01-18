@@ -1,15 +1,14 @@
 package com.example.demo.business.models;
 
-import java.io.Serializable;
+import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
-import jakarta.persistence.*;
-
 @Entity
 @Table(name = "venda")
-public class Venda  implements Serializable {
+public class Venda implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -28,6 +27,12 @@ public class Venda  implements Serializable {
     public Venda() {
     }
 
+    public Venda(float total, Vendedor vendedor, Date dia) {
+        this.total = total;
+        this.vendedor = vendedor;
+        this.dia = dia;
+    }
+
     @Override
     public String toString() {
         return "Venda{" +
@@ -37,14 +42,6 @@ public class Venda  implements Serializable {
                 ", dia=" + dia +
                 '}';
     }
-
-    public Venda(float total, Vendedor vendedor, Date dia) {
-        this.total = total;
-        this.vendedor = vendedor;
-        this.dia = dia;
-    }
-
-
 
     public UUID getId() {
         return id;

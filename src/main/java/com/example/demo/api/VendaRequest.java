@@ -18,6 +18,9 @@ public class VendaRequest {
         this.items = items;
     }
 
+    public VendaRequest() {
+    }
+
     public Venda getVenda() {
         return venda;
     }
@@ -36,10 +39,7 @@ public class VendaRequest {
 
     @Override
     public String toString() {
-        return "VendaRequest{" +venda.toString()+items.toString()+
+        return "VendaRequest{" + venda.toString() + items.toString() +
                 '}';
-    }
-
-    public VendaRequest() {
     }
 }

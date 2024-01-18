@@ -12,50 +12,53 @@ import java.util.List;
 public class VendedorService {
     @PersistenceContext
     private EntityManager entityManager;
+
     @Transactional
-    public Vendedor criar(Vendedor vendedor){
+    public Vendedor criar(Vendedor vendedor) {
         String query = "INSERT INTO vendedor (id, nome,contato) VALUES (uuid_generate_v4(),  :nome , :contato ) RETURNING *";
 
         return (Vendedor) entityManager.createNativeQuery(query, Vendedor.class)
-                .setParameter("nome",vendedor.getNome())
-                .setParameter("contato",vendedor.getContato())
+                .setParameter("nome", vendedor.getNome())
+                .setParameter("contato", vendedor.getContato())
                 .getSingleResult();
     }
+
     @Transactional
-    public List<Vendedor> buscar(Vendedor vendedor){
-        if (vendedor != null){
-            if (vendedor.getId() != null){
+    public List<Vendedor> buscar(Vendedor vendedor) {
+        if (vendedor != null) {
+            if (vendedor.getId() != null) {
                 String query = "SELECT * FROM vendedor WHERE id = :id";
-                return entityManager.createNativeQuery(query,Vendedor.class).setParameter("id",vendedor.getId()).getResultList();
-            } else if (vendedor.getNome()!= null) {
+                return entityManager.createNativeQuery(query, Vendedor.class).setParameter("id", vendedor.getId()).getResultList();
+            } else if (vendedor.getNome() != null) {
                 String query = "SELECT * FROM vendedor WHERE nome = :nome";
-                return entityManager.createNativeQuery(query,Vendedor.class).setParameter("nome",vendedor.getNome()).getResultList();
+                return entityManager.createNativeQuery(query, Vendedor.class).setParameter("nome", vendedor.getNome()).getResultList();
             }
         }
         String query = "SELECT * FROM vendedor";
         return entityManager.createNativeQuery(query, Vendedor.class).getResultList();
     }
+
     @Transactional
-    public void excluir(Vendedor vendedor ){
-        if (vendedor.getId() != null){
+    public void excluir(Vendedor vendedor) {
+        if (vendedor.getId() != null) {
             String query = "DELETE FROM vendedor WHERE id = :id";
-            entityManager.createNativeQuery(query).setParameter("id",vendedor.getId()).executeUpdate();
-        } else if (vendedor.getNome()!= null) {
+            entityManager.createNativeQuery(query).setParameter("id", vendedor.getId()).executeUpdate();
+        } else if (vendedor.getNome() != null) {
             String query = "DELETE FROM vendedor WHERE nome = :nome";
-            entityManager.createNativeQuery(query).setParameter("nome",vendedor.getNome()).executeUpdate();
+            entityManager.createNativeQuery(query).setParameter("nome", vendedor.getNome()).executeUpdate();
         }
 
     }
 
     @Transactional
-    public Vendedor editar(Vendedor vendedor){
-        if (vendedor.getId() != null){
-            if (vendedor.getNome()!= null){
-                String query ="UPDATE vendedor SET nome = :nome WHERE id = :id RETURNING *";
-                return (Vendedor) entityManager.createNativeQuery(query, Vendedor.class).setParameter("id",vendedor.getId()).setParameter("nome",vendedor.getNome()).getSingleResult();
-            } else if (vendedor.getContato()!= null) {
-                String query ="UPDATE vendedor SET contato = :contato WHERE id = :id RETURNING *";
-                return (Vendedor) entityManager.createNativeQuery(query, Vendedor.class).setParameter("id",vendedor.getId()).setParameter("contato",vendedor.getContato()).getSingleResult();
+    public Vendedor editar(Vendedor vendedor) {
+        if (vendedor.getId() != null) {
+            if (vendedor.getNome() != null) {
+                String query = "UPDATE vendedor SET nome = :nome WHERE id = :id RETURNING *";
+                return (Vendedor) entityManager.createNativeQuery(query, Vendedor.class).setParameter("id", vendedor.getId()).setParameter("nome", vendedor.getNome()).getSingleResult();
+            } else if (vendedor.getContato() != null) {
+                String query = "UPDATE vendedor SET contato = :contato WHERE id = :id RETURNING *";
+                return (Vendedor) entityManager.createNativeQuery(query, Vendedor.class).setParameter("id", vendedor.getId()).setParameter("contato", vendedor.getContato()).getSingleResult();
             }
         }
 

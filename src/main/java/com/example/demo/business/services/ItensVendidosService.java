@@ -7,7 +7,6 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
 import java.util.UUID;
 
@@ -35,6 +34,6 @@ public class ItensVendidosService {
     @Transactional
     public List buscar(UUID vend_id) {
         String query = "SELECT i.* FROM venda_item vi JOIN itens i ON vi.item_vendido_id = i.id  WHERE venda_id = :id";
-        return entityManager.createNativeQuery(query,Item.class).setParameter("id", vend_id).getResultList();
+        return entityManager.createNativeQuery(query, Item.class).setParameter("id", vend_id).getResultList();
     }
 }

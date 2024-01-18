@@ -18,14 +18,16 @@ public class ItensController {
     public Item cadastrarItens(@RequestBody Item item) {
         return itemService.criar(item);
     }
+
     /* PathParam*/
     @DeleteMapping()
     public void excluirItem(@RequestBody Item item) {
         itemService.excluir(item);
     }
-/* RequestParam*/
+
+    /* RequestParam*/
     @GetMapping
-    public List<Item> buscarItens(@RequestBody(required = false) Item item) {
+    public List<Item> buscarItens(@ModelAttribute Item item) {
         return itemService.buscar(item);
     }
 

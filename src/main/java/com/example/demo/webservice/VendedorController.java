@@ -12,30 +12,30 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/vendedores")
 public class VendedorController {
-    @PersistenceContext
-    private EntityManager entityManager;
     @Autowired
     VendedorService vendedorService;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @PostMapping
     public Vendedor cadastrarVendedor(@RequestBody Vendedor vend) {
-         return vendedorService.criar(vend);
+        return vendedorService.criar(vend);
     }
 
     @DeleteMapping
-    public void excluirVendedor(@RequestBody Vendedor vendedor){
+    public void excluirVendedor(@RequestBody Vendedor vendedor) {
         vendedorService.excluir(vendedor);
     }
 
     @GetMapping
-    public List<Vendedor> buscarVendedor(@RequestBody(required = false)Vendedor vendedor) {
-        return  vendedorService.buscar(vendedor);
-    }
-    @PutMapping
-    public Vendedor editar(@RequestBody Vendedor vendedor){
-        return vendedorService.editar(vendedor);
+    public List<Vendedor> buscarVendedor(@ModelAttribute Vendedor vendedor) {
+        return vendedorService.buscar(vendedor);
     }
 
+    @PutMapping
+    public Vendedor editar(@RequestBody Vendedor vendedor) {
+        return vendedorService.editar(vendedor);
+    }
 
 
 }

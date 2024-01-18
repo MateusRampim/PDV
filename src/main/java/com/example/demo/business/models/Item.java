@@ -1,21 +1,19 @@
 package com.example.demo.business.models;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.UUID;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "itens")
-public class Item implements Serializable{
+public class Item implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String nome;
     private int estoque;
+    private float valor;
 
     public Item() {
     }
@@ -35,8 +33,6 @@ public class Item implements Serializable{
                 ", valor=" + valor +
                 '}';
     }
-
-    private float valor;
 
     public UUID getId() {
         return this.id;
