@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/itens")
+@RequestMapping({"/api/v1/itens","/api/v1/itens/{id}"})
 public class ItensController {
 
     @Autowired
@@ -21,8 +22,8 @@ public class ItensController {
 
     /* PathParam*/
     @DeleteMapping()
-    public void excluirItem(@RequestBody Item item) {
-        itemService.excluir(item);
+    public void excluirItem(@PathVariable UUID id) {
+        itemService.excluir(id);
     }
 
     /* RequestParam*/

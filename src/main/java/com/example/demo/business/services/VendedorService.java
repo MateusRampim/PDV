@@ -7,6 +7,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class VendedorService {
@@ -39,13 +40,10 @@ public class VendedorService {
     }
 
     @Transactional
-    public void excluir(Vendedor vendedor) {
-        if (vendedor.getId() != null) {
+    public void excluir(UUID vendedor) {
+        if (vendedor != null) {
             String query = "DELETE FROM vendedor WHERE id = :id";
-            entityManager.createNativeQuery(query).setParameter("id", vendedor.getId()).executeUpdate();
-        } else if (vendedor.getNome() != null) {
-            String query = "DELETE FROM vendedor WHERE nome = :nome";
-            entityManager.createNativeQuery(query).setParameter("nome", vendedor.getNome()).executeUpdate();
+            entityManager.createNativeQuery(query).setParameter("id", vendedor).executeUpdate();
         }
 
     }

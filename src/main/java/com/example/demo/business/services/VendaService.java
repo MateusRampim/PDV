@@ -43,13 +43,10 @@ public class VendaService {
     }
 
     @Transactional
-    public void excluir(Venda venda) {
-        if (venda.getId() != null) {
-
-            itensVendidosService.deletar(venda.getId());
-            String query = "DELETE FROM venda WHERE id = :id";
-            entityManager.createNativeQuery(query).setParameter("id", venda.getId()).executeUpdate();
-        }
+    public void excluir(UUID id) {
+        itensVendidosService.deletar(id);
+        String query = "DELETE FROM venda WHERE id = :id";
+        entityManager.createNativeQuery(query).setParameter("id",id).executeUpdate();
 
     }
 

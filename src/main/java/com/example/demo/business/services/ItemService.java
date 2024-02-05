@@ -51,13 +51,10 @@ public class ItemService {
     }
 
     @Transactional
-    public void excluir(Item item) {
-        if (item.getId() != null) {
+    public void excluir(UUID item) {
+        if (item != null) {
             String query = "DELETE FROM itens WHERE id = :id";
-            entityManager.createNativeQuery(query).setParameter("id", item.getId()).executeUpdate();
-        } else if (item.getNome() != null) {
-            String query = "DELETE FROM itens WHERE nome = :nome";
-            entityManager.createNativeQuery(query).setParameter("nome", item.getNome()).executeUpdate();
+            entityManager.createNativeQuery(query).setParameter("id", item).executeUpdate();
         }
 
     }

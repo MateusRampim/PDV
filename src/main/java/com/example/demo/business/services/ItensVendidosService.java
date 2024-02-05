@@ -27,7 +27,7 @@ public class ItensVendidosService {
 
     @Transactional
     public void deletar(UUID id_venda) {
-        String query = "DELETE FROM venda_item WHERE venda_id = :id;";
+        String query = "DELETE FROM venda_item WHERE venda_id = :id";
         entityManager.createNativeQuery(query, VendaService.class).setParameter("id", id_venda).executeUpdate();
     }
 

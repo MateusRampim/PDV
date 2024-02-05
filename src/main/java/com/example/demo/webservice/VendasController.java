@@ -8,9 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/vendas")
+@RequestMapping({"/api/v1/vendas","/api/v1/vendas/{id}"})
 public class VendasController {
     @Autowired
     VendaService vendaService;
@@ -22,8 +23,9 @@ public class VendasController {
     }
 
     @DeleteMapping
-    public void excluir(@RequestBody Venda venda) {
-        vendaService.excluir(venda);
+    public void excluir(@PathVariable UUID id) {
+        System.out.println(id);
+        vendaService.excluir(id);
     }
 
     @GetMapping
