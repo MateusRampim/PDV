@@ -1,15 +1,12 @@
-package com.example.demo.models;
+package com.example.demo.business.models;
+
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.UUID;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Vendedor")
+@Table(name = "vendedor")
 public class Vendedor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,7 +22,16 @@ public class Vendedor implements Serializable {
         this.contato = contato;
     }
 
-    public UUID getIdpesso() {
+    @Override
+    public String toString() {
+        return "Vendedor{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", contato='" + contato + '\'' +
+                '}';
+    }
+
+    public UUID getId() {
         return this.id;
     }
 
