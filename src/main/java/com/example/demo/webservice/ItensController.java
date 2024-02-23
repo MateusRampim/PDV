@@ -2,14 +2,15 @@ package com.example.demo.webservice;
 
 import com.example.demo.business.models.Item;
 import com.example.demo.business.services.ItemService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
-
+@Tag(name="Itens")
 @RestController
-@RequestMapping({"/api/v1/itens","/api/v1/itens/{id}"})
+@RequestMapping("/api/v1/itens")
 public class ItensController {
 
     @Autowired
@@ -21,7 +22,7 @@ public class ItensController {
     }
 
     /* PathParam*/
-    @DeleteMapping()
+    @DeleteMapping("/{id}")
     public void excluirItem(@PathVariable UUID id) {
         itemService.excluir(id);
     }
